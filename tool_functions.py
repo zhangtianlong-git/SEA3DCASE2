@@ -28,7 +28,7 @@ def calc_cost(current, ngoal):
 
 def calc_cost_new(current, heuristic):
     cx, cy, cz = current.xlist[-1], current.ylist[-1], current.zlist[-1]
-    return current.cost + 0.98*heuristic[round(cx), round(cy)]
+    return current.cost + 0.95*heuristic[round(cx), round(cy)]
 
 
 def z_y_move(x, y, z, theta_xy, gradient_z, distance, radi):  # 直线或者圆探索
