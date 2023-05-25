@@ -238,8 +238,8 @@ if __name__ == '__main__':
     resolution = 1
     bpd_lens = list(np.loadtxt('bpd_lens.txt'))
     slopes = list(np.loadtxt('slopes.txt'))
-    ks = [5800] * len(slopes)
-    z_start, z_end = terrain[round(points[0]), round(points[1])], terrain[round(points[-4]), round(points[-3])]
+    ks = [3000] * len(slopes)
+    z_start, z_end = 4544.73, 4474.44
     # todo 总长度计算错误，检查
     total_len, len_set = get_geo_lens_and_type(points)
     intervals, step_lens = get_points_by_len_and_interval(
@@ -261,7 +261,7 @@ if __name__ == '__main__':
         if round(interv*1000) == 1000:
             print('pause!!')
         fill2, cut2, width, _ = get_cross_fill_cut(
-            x, y, z_final, a, terrain, 4.58, 20, math.tan(0.78), math.tan(0.59))
+            x, y, z_final, a, terrain, 3.625, 25, 2, 0.6667)
         fill1, cut1, _, _ = 0, 0, 0, 0
         t_fill1, t_fill2, t_cut1, t_cut2 = t_fill1 + fill1 * \
             s, t_fill2 + fill2*s, t_cut1 + cut1*s, t_cut2 + cut2*s

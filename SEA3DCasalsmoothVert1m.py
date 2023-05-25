@@ -18,7 +18,7 @@ MIN_R = 15  # 最小曲线半径
 MIN_LEN_CURV = 15  # 最短曲线长度
 MIN_LEN_TAN = 20  # 最短直线长度
 THETA_XY_RESOLUTION = np.deg2rad(1)  # 平面角度分辨率
-K_MIN = 5800  # Cacal论文中的K，K*坡度差=竖曲线长度,即竖曲线半径
+K_MIN = 3000  # Cacal论文中的K，K*坡度差=竖曲线长度,即竖曲线半径
 MAX_LEN_TAN = 300  # 最大直线长度
 ZMAX = 400  # 最大高程差
 """----------------"""
@@ -414,13 +414,11 @@ def calculate_cost(f_c_list_in, loc_len_cost_in, x, y, z, a, s, g):
     [lc0, cc0, pc0, mc0] = loc_len_cost_in
     # 计算两层土对应的挖方和填方量，上层土为土层"2"
     tmp_f2, tmp_c2, tmp_wid, is_exceed = get_cross_fill_cut(
-        x, y, z, a, terrain, 4.58, 20, math.tan(0.78), math.tan(0.59)
+        x, y, z, a, terrain, 3.625, 25, 2, 0.6667
     )
     if is_exceed:
         return (None, None, is_exceed)
-    tmp_f1, tmp_c1, _, _ = get_cross_fill_cut(
-        x, y, z, a, terrain1, 4.58, 20, math.tan(0.78), math.tan(0.59)
-    )
+    tmp_f1, tmp_c1, _, _ = 0, 0, 0, 0
     tf1_0, tf2_0, tc1_0, tc2_0 = (
         tf1_0 + tmp_f1 * s,
         tf2_0 + tmp_f2 * s,
@@ -496,8 +494,8 @@ gx = 599.43  # [m]
 gy = 223.14  # [m]
 sx = 40.78  # [m]
 sy = 304.66  # [m]
-start = [sx, sy, terrain[round(sx), round(sy)], tf.pi_2_pi(np.deg2rad(-55))]
-goal = [gx, gy, terrain[round(gx), round(gy)], tf.pi_2_pi(np.deg2rad(0))]
+start = [sx, sy, 4544.73, tf.pi_2_pi(np.deg2rad(-55))]
+goal = [gx, gy, 4474.44, round(gy), tf.pi_2_pi(np.deg2rad(0))]
 """
 挖填方体积：fill_cut_volunm，包含两层土，分别为[fill1, fill2, cut1, cut2]， "1"表示下层土
 线路平面相关成本：loc_and_len_cost，包含[占地成本，清理成本，铺路成本，养护成本]
