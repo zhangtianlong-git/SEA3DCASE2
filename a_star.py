@@ -97,7 +97,7 @@ def dp_planning(sx, sy, gx, gy, ox, oy, reso, rr, max_g):
             # 考虑地形是否超过最大坡度，z坐标是可达的高程
             ter_dif = terrain[new_x, new_y] - current.z
             abs_td = abs(ter_dif)
-            if abs_td >= 4:
+            if abs_td >= 2:
                 continue
             sign_td = 1 if ter_dif > 0 else -1
             # 考虑最大坡度，超过最大坡度的算挖填方
@@ -113,7 +113,7 @@ def dp_planning(sx, sy, gx, gy, ox, oy, reso, rr, max_g):
                 terrain[current.x, current.y]-current.z))*motion[i][2]/2*9
             v_price = volumn*20
             new_cost = current.cost + \
-                motion[i][2]*327*csc + motion[i][2]*csc*(9+6)*7 + v_price
+                motion[i][2]*300*csc + motion[i][2]*csc*(7.25+6)*10 + v_price
             node = Node(new_x, new_y, new_cost, c_id, z=new_z)
             n_id = calc_index(node, xw, minx, miny)
 
@@ -210,8 +210,8 @@ def main():
     # start and goal position
     global frame
     global artists
-    gx = 556.61   # [m]
-    gy = 196.75  # [m]
+    gx = 599.43   # [m]
+    gy = 223.14  # [m]
     sx = 40.78  # [m]
     sy = 304.66  # [m]
     grid_size = 1.0  # [m]

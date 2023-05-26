@@ -426,10 +426,10 @@ def calculate_cost(f_c_list_in, loc_len_cost_in, x, y, z, a, s, g):
         tc2_0 + tmp_c2 * s,
     )
     # 计算占地成本，清理成本，铺路成本和养护成本
-    lc0 = lc0 + (tmp_wid + 6) * 7 * s
-    cc0 = cc0 + 0.6 * tmp_wid * s * (1 + g**2) ** 0.5
-    pc0 = pc0 + 327 * s * (1 + g**2) ** 0.5
-    mc0 = mc0 + 60 * s * (1 + g**2) ** 0.5
+    lc0 = lc0 + (tmp_wid + 6) * 10 * s
+    cc0 = cc0 + 1 * tmp_wid * s * (1 + g**2) ** 0.5
+    pc0 = pc0 + 300 * s * (1 + g**2) ** 0.5
+    mc0 = mc0 + 80 * s * (1 + g**2) ** 0.5
     f_c_list = [tf1_0, tf2_0, tc1_0, tc2_0]
     loc_len_cos = [lc0, cc0, pc0, mc0]
     return (f_c_list, loc_len_cos, is_exceed)

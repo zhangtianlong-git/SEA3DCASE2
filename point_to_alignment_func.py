@@ -236,8 +236,12 @@ if __name__ == '__main__':
     terrain = (np.flip(ZTMP, axis=0)).T
     points = list(np.loadtxt('points.txt'))
     resolution = 1
-    bpd_lens = list(np.loadtxt('bpd_lens.txt'))
-    slopes = list(np.loadtxt('slopes.txt'))
+    try:
+        bpd_lens = list(np.loadtxt('bpd_lens.txt'))
+        slopes = list(np.loadtxt('slopes.txt'))
+    except:
+        bpd_lens = [float(np.loadtxt('bpd_lens.txt'))]
+        slopes = [float(np.loadtxt('slopes.txt'))]
     ks = [3000] * len(slopes)
     z_start, z_end = 4544.73, 4474.44
     # todo 总长度计算错误，检查
@@ -265,10 +269,10 @@ if __name__ == '__main__':
         fill1, cut1, _, _ = 0, 0, 0, 0
         t_fill1, t_fill2, t_cut1, t_cut2 = t_fill1 + fill1 * \
             s, t_fill2 + fill2*s, t_cut1 + cut1*s, t_cut2 + cut2*s
-        land_cost += (width+6)*7*s
-        clear_cost += 0.6*width*s*(1+g**2)**0.5
-        pave_cost += 327*s*(1+g**2)**0.5
-        maintain_cost += 60*s*(1+g**2)**0.5
+        land_cost += (width+6)*10*s
+        clear_cost += 1*width*s*(1+g**2)**0.5
+        pave_cost += 300*s*(1+g**2)**0.5
+        maintain_cost += 80*s*(1+g**2)**0.5
     total_soil_cost = np.array(get_multi_layer_cost(t_cut1, t_cut2, t_fill2)) 
     all_cost = sum(total_soil_cost) + land_cost + clear_cost + pave_cost + maintain_cost
     end_time = time.time()
